@@ -1,0 +1,37 @@
+git init
+git remote set-url origin git@github.com:Countrypie/Trabajo-Individual-Repositorio-Git.git
+git add .
+git commit -m "Creación de repositorio: Creada estructura de carpetas del directorio, archivos README e historia.txt en raíz. En Control De Cambios creados la primera versión del proceso de control de cambios, y carpeta con todas las plantillas en blanco"
+git push -u origin master
+
+git tag -a R1 -m "Primera tag para la v1"
+git push origin R1
+
+git checkout -b Mejoras
+git mv "./Procesos/Control de cambios/DP_ControldeCambios_Grupo4[4]-v1.docx" "./Procesos/Control de cambios/DP_ControldeCambios_Grupo4[4]-v2.docx"
+git add .
+git commit -m "Cambios propuestos implementados: Añadidos archivo pdf con cambios propuestos y versión v2 del proceso de control de cambios."
+git push origin Mejoras
+
+git checkout master
+git merge -X theirs Mejoras
+git commit -m "Fusión ramas Master y Mejoras: Se mantienen los cambios en Mejoras para que sobreescriban en Master"
+git push origin master
+git push origin --delete Mejoras
+
+git add .
+git tag -a R2 -m "Segunda tag para la v2"
+git commit -m "Establecimiento de versión 2: Borrado de los cambios propuestos y nueva etiqueta R2"
+git push origin master
+git push origin --tags
+
+git add .
+git commit -m "Actualización versión 3: Cambio del proceso de control de cambios de v2 a v3"
+git push origin master
+
+git log
+git revert b3cc31bdeb790e1ca20cddd0808efd0a375255a6
+add .
+git tag -a R3 -m "Tercera tag para la v3"
+git commit -m "Corrección error v3: Añadidas las plantillas de la v3 actualizadas, borrada la v2 del documeno y sustituida por la v3. También añadida la etiqueta R3 correspondiente a la v3"
+git push origin master --tags
