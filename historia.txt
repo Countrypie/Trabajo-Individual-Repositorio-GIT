@@ -1,37 +1,96 @@
+##1
+#Creo el directorio git local. No fui capaz de trabajar con bash_history, así que todo está hecho en bash
 git init
+#Enlazo el local con el de github
 git remote set-url origin git@github.com:Countrypie/Trabajo-Individual-Repositorio-Git.git
+
+##2
+#Añado todos los archivos recién creados en el directorio de trabajo al staging area
 git add .
+#Añado lo que está en el staging area al repositorio local
 git commit -m "Creación de repositorio: Creada estructura de carpetas del directorio, archivos README e historia.txt en raíz. En Control De Cambios creados la primera versión del proceso de control de cambios, y carpeta con todas las plantillas en blanco"
+
+##3
+#Envío del directorio local al remoto
 git push -u origin master
 
+##4
+#Creo una tag
 git tag -a R1 -m "Primera tag para la v1"
+#Envío la tag al directorio remoto
 git push origin R1
 
+##5
+#Creo y me posiciono en una rama llamada Mejoras
 git checkout -b Mejoras
+
+##6
+#Aquí quería cambiar el nombre de v1 a v2 y que lo siguiera contando como que era el mismo archivo actualizado, pero parece que no funcionó.
 git mv "./Procesos/Control de cambios/DP_ControldeCambios_Grupo4[4]-v1.docx" "./Procesos/Control de cambios/DP_ControldeCambios_Grupo4[4]-v2.docx"
+#Estructura para enviar cambios a remoto
 git add .
 git commit -m "Cambios propuestos implementados: Añadidos archivo pdf con cambios propuestos y versión v2 del proceso de control de cambios."
 git push origin Mejoras
 
+##7
+#Me muevo a la rama principal
 git checkout master
+#Fusiono la principal con Mejoras, y en caso de conflicto mantener cambios de Mejoras
 git merge -X theirs Mejoras
+#Enviar cambios a rama master en remoto
 git commit -m "Fusión ramas Master y Mejoras: Se mantienen los cambios en Mejoras para que sobreescriban en Master"
 git push origin master
+#Borrar la rama Mejoras en remoto
 git push origin --delete Mejoras
 
+##8
 git add .
+
+##9
+#Se crea la segunda tag
 git tag -a R2 -m "Segunda tag para la v2"
+#Estructura para enviar a remoto
 git commit -m "Establecimiento de versión 2: Borrado de los cambios propuestos y nueva etiqueta R2"
 git push origin master
-git push origin --tags
+git push origin --tags	#Se puede hacer commit de archivos y tags a la vez
 
+##10
+#Tras añadir v3, estructura para enviar a remoto
 git add .
 git commit -m "Actualización versión 3: Cambio del proceso de control de cambios de v2 a v3"
 git push origin master
 
+##11
+#Como se detecto error, se abre historial de commits
 git log
+#Se deshace a versión anterior usando hash del commit
 git revert b3cc31bdeb790e1ca20cddd0808efd0a375255a6
+#Aqui aparecio un editor de texto
+#Estructura para enviar a remoto
 add .
 git tag -a R3 -m "Tercera tag para la v3"
 git commit -m "Corrección error v3: Añadidas las plantillas de la v3 actualizadas, borrada la v2 del documeno y sustituida por la v3. También añadida la etiqueta R3 correspondiente a la v3"
+
+##12
 git push origin master --tags
+
+#Error mio
+git add .
+it commit -m "Actualización historia.txt: Me acabo de dar cuenta de que no estaba escribiendo en el archivo historia.txt del directorio git, sino en otro archivo llamado igual, entonces el archivo del Github está desactualizado."
+git push origin master
+
+##13
+#Se hace pull despues de un tiempo
+git pull origin master
+
+##14
+#Se ven los cambios a historia.txt comparado con lo que tengo en local
+git diff historia.txt
+#Aqui aparecen varias lineas añadidas
+
+##15
+#Estructura para enviar todos los cambios finales del proyecto a remoto
+git add .
+git commit -m "Actualización con todos los cambios"
+git push origin master
+
